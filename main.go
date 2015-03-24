@@ -22,7 +22,8 @@ func main() {
 
 func listenAndServe(handlerFunc http.HandlerFunc) {
 	log.Println("Starting 8080")
-	http.ListenAndServe(":8080", http.HandlerFunc(handlerFunc))
+	http.HandlerFunc("/", handlerFunc)
+	http.ListenAndServe(":8080", nil)
 }
 
 func mainChaining() {
