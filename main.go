@@ -21,11 +21,8 @@ func main() {
 }
 
 func listenAndServe(handlerFunc http.HandlerFunc) {
-	log.Println("Starting 8080")
-	http.HandlerFunc("/", handlerFunc)
-	http.ListenAndServe(":8080", nil)
-}
-
-func mainChaining() {
-	listenAndServe(logger(single(helloHandler, "localhost:8080")))
+	log.Println("Starting 80")
+	http.HandleFunc("/", logger(handlerFunc))
+	http.HandleFunc("/admin", logger(single(handlerFunc, "localhost")))
+	http.ListenAndServe(":80", nil)
 }
